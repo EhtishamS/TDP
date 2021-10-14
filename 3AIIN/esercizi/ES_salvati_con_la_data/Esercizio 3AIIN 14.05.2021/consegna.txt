@@ -1,0 +1,4 @@
+Creare un programma che preso in input un file modifica l'andare di windows in quello di linux.
+
+la differenza e questa che quello di windows e così \r\n
+mentre quello di linux e così \n

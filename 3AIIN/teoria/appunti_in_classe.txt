@@ -1,0 +1,35 @@
+p1.exe
+p2.exe
+p3.exe
+
+Ready queue:
+|p1|p2|
+
+Quando arriva il tempo di un programma allora queste viene tolta dalla ready queue e questo programma viene messo in running. 
+Una volta finito il suo quanto di tempo, questo torna di nuovo nello stato di ready però in fine alla coda. Ma se si è in running e viene chiesto un'operazione di I/O questo resta wait (perché operazioni I/O sono molto lenti). Lo mettiamo in wait perché così possiamo dare via ad altri programmi, e appena finisce di fare quello che deve fare e va in stato ready e viene messo in coda.
+
+ready <--> running -> wait
+ ^  		       |
+ |_____________________|
+
+
+F.I.F.O.
+First In
+First Out
+
+Round-Robin = preempion (preemptive), sono algoritmi che permettono di stoppare un'istruzione in qualsiasi un momento solo per il fatto di aver esaurito il tempo. 
+
+Scheduling con priorità = usato più code in base alla sua importanza. Ma ogni programma può chiedere di essere alzato di priorità. 
+
+L1 | | | | 
+L2 | | |1|
+L3 | |2|3|
+
+se noi eseguiamo di L2 che ha solo 1, ma dopo che ha rannato 1 questo viene di nuovo messo in coda L2 però verrà di nuovo eseguito. Per questo motivo anche 2,3 dopo un po di tempo richiedono di alzare la loro priorità.
+
+THREAD = "FILO"
+In informatica significa "Flusso di istruzioni", che possono essere eseguite in parallelo con altri flussi di istruzioni.
+
+ 
+Thread vengono chiamati light weight process (processi leggeri). 
+All'interno di un processo posso essere più di un Thread, che può essere eseguito in parallelo. 

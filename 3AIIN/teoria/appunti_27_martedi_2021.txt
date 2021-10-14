@@ -1,0 +1,92 @@
+GESTIONE DELLA MEM PRINCIPALE:
+-Indirizzi fisici/logici
+-Rilocazione
+-Allocazione contigua
+-Paginazione
+-paginazione segmentata
+
+Indirizzo fisico e indirizzo logico
+
+Per indirizzo fisico si intende proprio quello che della ram.
+Indirizzo logico è quello che viene assegnato durante un processo.
+magari l'indirizzo fisico di un cella e 100, ma durante un processo questo prende l'indirizzo logico di 0.
+
+LOAD 
+STORE 
+
+sono due istruzione macchina che richiedono un indirizzo (che maggioranza di casi e logico).
+
+perché magari il mio programma se scala, se contine l'indirizzo fisico questo non si modifica ma se è logico questo sa cosa deve fare.
+
+Nelle CPU moderne ci sta un componente che si chiama MMU (Memory Management Unit), che ha lo scopo di volocizzare la conversione da indirizzi logici a fisici. Perché magari se facciamo un programma, lo compliamo e questo ci da dei indirizzi logici, però alla mia ram serve un indirizzo fisico e questo compito viene svolto da MMU (chip). 
+
+Ma se noi la stessa cosa facciamo con il S.O. questo diventerà troppo lento. 
+
+ogni indirizzo dalla CPU passa da MMU. Alla CPU viene dato un indirizzo logico e la CPU setta MMU per convertire l'indirizzo logico in quello fisico, una volta fatto questo possiamo far passare l'indirizzo proveninente dalla CPU e convertito dalla MMU e viene dato alla RAM.
+______
+
+
+Allocazione Contigua (una dopo l'altra):
+
+Frammentazione: se io alloco p1, p2, p3 e se p2 finisce adesso abbiamo posto di p2 libero ma se viene lanciato un processo p4 che però è più grande del posto libero, per la somma dei posti liberi però ci dice che possiamo farlo, allora la nostra CPU ferma tutti i processi e fa traslare i miei processi in basso per comprire i buchi e compatta il programma. Questo tipo di gestione ci impiega troppo tempo. 
+
+Paginazione:
+Divido la mia RAM in pagine che hanno una dimensione fissa e ogni pagina ha un numero fisso.
+
+ad esempio una memoria di 1 GB e il O.S. ha una pagina 8kb. 
+
+1 mb = 2^10 --> 1 kb
+8 kb = 2^3 
+
+pagina = 2^13
+
+1 GB = 2^30 / 2^ 13 = 2^30-13 = 2^17 --> numero di pagine.
+  
+con la paginazione abbiamo il vantaggio che non dobbiamo mettere in nostro il processo in memoria contigua, ma possiamo mettere in un pagina libera. 
+
+pagina logica e quella che viene allocata dalla cpu, nella RAM.
+
+e per ogni programma deve memorizzare la tabella delle pagine di ogni processo. Questa tabella sta nel PCB, e generalemente c'è un puntatore che punta alla pagina che viene messo in PCB.
+
+ 
+esercizio:
+
+8kb dimensione della pagina
+0x200A l'indirizzo logico.
+
+Trovare l'indirizzo fisico.
+
+8kb in bit è uguale a 2^13 = 
+= 0010 0000 0000 0000 = 0X2000; <-- va fino a questo bite.
+
+la seconda pagina inizia a 0x1fff
+
+e così via.
+
+sta nel secondo blocco ma alla decima posizione nella cella.
+
+
+Page fault ( errore di pagina )
+
+
+Quando un processo ha superato il limite massimo di pagine che poteva occupare oppure per qualche motivo la mia ram è piena quindi non può assengare una pagina logica al processo.
+In questo caso il sistema operativo va in crash. 
+In questi casi può fare queste cose:
+
+1) Individuare una pagina fisica da sostituire.
+2) Ricopiare il contenuto di qeusta pagina su disco ( in una zona chiamata area di swap ).
+
+
+
+FIFO = (first in first out) la prima ad uscire dalla ram sarà quella che sarà caricata prima. nella pagina del processo si può segnare il time stamp, tramite la quale può capire quale dei processi era stato caricato prima. 
+
+LRU = (least Recently used) la meno usata recentemente. In questo caso il sistema operativo aggiorna ogni volta il time stamp così vede qual'è quella meno utilizzata così può eliminare la pagina meno usata.
+
+LFU = (Least frequently used) la meno usata usata, in questo caso il programma elimina il processo che è meno utilizzato.
+
+
+
+
+
+
+
